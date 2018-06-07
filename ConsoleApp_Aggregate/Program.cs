@@ -28,6 +28,21 @@ namespace ConsoleApp_Aggregate
 
             //顯示最終的存款數
             Console.WriteLine("Ending balance: {0}", balance);
+            Console.WriteLine("我是分隔線==================================================");
+
+            var balanceStatus =
+                withdrawItems.Aggregate(myBalance,
+                (originbalance, nextWithdrawal) =>
+                {
+                    return ((nextWithdrawal <= originbalance) ? (originbalance -
+                    nextWithdrawal) : originbalance);
+                },
+                (finalbalance) =>
+                {
+                    return (finalbalance >= 1000) ? "Normal" : "Lower";
+                });
+            Console.WriteLine("Balance status: {0}", balanceStatus);
+
             Console.Read();
         }
     }
